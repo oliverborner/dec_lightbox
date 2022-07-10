@@ -49,8 +49,11 @@
 // LEDS
 
 int all_letters[] = { 9, 10 };  // PWM, 9 -> D, 10 -> E
-int letterCount = 2;            // how many letters you want to drive
+int letterCount = 2; // how many letters you want to drive
 
+
+int toggleSwitch1 = 7;
+int toggleSwitchState1 = 0;  
 
 // OTHER
 
@@ -75,13 +78,32 @@ void setup() {
   // SOUNDSENSOR
   pinMode(soundSensor, INPUT);
 
+  // ToggleSwitch 1
+  pinMode(toggleSwitch1, INPUT_PULLUP);
+
 }
 
 
 /* --------------------------- MAIN LOOP ----------------------------- */
 
 void loop() {
+  
+  // switch case?
 
+  // Toggle Switch 1
+  toggleSwitchState1 = digitalRead(toggleSwitch1);
+  
+  if (toggleSwitchState1 == HIGH) {
+    //
+    dec_just_on(all_letters);
+    
+  } else {
+    // 
+    dec_disco(all_letters[0], all_letters[1]);
+    
+  }
+
+  
   // STARTUP
   // if no toggleswitch on
   
@@ -90,7 +112,7 @@ void loop() {
   
   // DISCO
   
-  dec_disco(all_letters[0], all_letters[1]);
+  //dec_disco(all_letters[0], all_letters[1]);
   
 
   // TESTS
